@@ -1,0 +1,213 @@
+---
+title: "Tarea 3"
+author: '[indique su correo, sin corchetes]'
+output:
+  html_document: default
+  html_notebook: default
+editor_options: 
+  chunk_output_type: console
+---
+
+
+---
+
+# Instrucciones
+
+- La siguiente tarea contiene una serie de ejercicios donde se requiere calcular y reportar medidas de tendencia central, de posición, de dispersión, tablas y producir gráficos para visualizar la distribución de los valores de una variable.
+
+- Vamos a emplear una copia de los datos del estudio de Poli victimización de Jóvenes, realizada en Chile en Octubre de 2017.
+
+- Los datos que vamos a emplear son una versión recortada de los datos y con nombres adaptados, que se espera sean más amigables.
+
+- El archivo que contiene los datos que vamos a emplear ya está cargado en el proyecto en posit y se llama:
+
+```
+datos_poli_2017.csv
+```
+
+- El libro de códigos de la base de datos que vamos a emplear, se llama:
+
+```
+datos_poli_2017_codebook.xlsx
+```
+
+- **Advertencia**: Los datos originales provienen de una muestra probabilística. Este tipo de datos, permite realizar inferencias a la población, si la información del diseño es empleada para producir estimaciones. En este ejercicio con fines ilustrativos, vamos a ignorar este aspecto, y solo vamos a producir resultados descriptivos.
+
+# Referencias
+
+Alvarez, E., Guajardo, H., & Messen, R. (1986). Estudio exploratorio sobre una escala de autoevaluación para la depresión en niños y adolescentes. Revista Chilena de Pediatria, 57(1), 21–25. https://doi.org/10.4067/s0370-41061986000100003
+
+Birleson, P., Hudson, I., Buchanan, D. G., & Wolff, S. (1987). Clinical Evaluation of a Self‐Rating Scale for Depressive Disorder in Childhood (Depression Self‐Rating Scale). Journal of Child Psychology and Psychiatry, 28(1), 43–60. https://doi.org/10.1111/j.1469-7610.1987.tb00651.x
+
+Consejo Nacional de la Infancia. (2018). Análisis Multivariable de Estudio de Polivictimización en Niños, Niñas y Adolescentes realizado por la Pontificia Universidad Católica de Chile. http://biblioteca.digital.gob.cl/handle/123456789/3535
+
+Denda, K., Kako, Y., Kitagawa, N., & Koyama, T. (2006). Assessment of depressive symptoms in Japanese school children and adolescents using the birleson depression self-rating scale. International Journal of Psychiatry in Medicine, 36(2), 231–241. https://doi.org/10.2190/3YCX-H0MT-49DK-C61Q
+
+
+MINSAL. (2013). Guía Clínica para el tratamiento de adolescentes de 10 a 14 años con Depresión. https://www.guiadisc.com/wp-content/pdfs/guia-clinica-tratamiento-depresion-adolescentes.pdf
+
+Subsecretaria Prevención del Delito. (2018). Primera Encuesta Nacional de Polivictimización en Niñas, Niños y Adolescentes: Presentación de Resultados.
+
+---
+
+# Ejercicios
+
+
+## Ejercicio 1. Abrir los datos.
+
+- Abra los datos `datos_poli_2017.csv`, empleando la función `read.csv()`. Aloje los datos en un objeto llamado `data_poli_full` .
+
+```{r}
+
+# Escriba su código de respuesta aquí
+data_poli_full <- read.csv("datos_poli_2017.csv")
+
+```
+
+## Ejercicio 2. Vista previa de los datos.
+
+- **¿Cuántas variables, y cuántos casos posee la base de datos original?**
+- Indique su respuesta bajo el código.
+
+```{r}
+
+# Escriba su código de respuesta aquí
+
+
+```
+
+- Respuesta 
+  + Casos: [escriba aquí la cantidad de casos, y borre los corchetes]
+  + Variables: [escriba aquí la cantidad de variables, y borre los corchetes]
+
+
+## Ejercicio 3. Generar muestra aleatoria
+
+- Al igual que en la tarea 1, queremos que se produzcan resultados que sean únicos para cada uno de ustedes. De esta forma, les solicitamos que generen una muestra de datos que sea única a su rut. En esta sección solo tendrá que reemplazar el valor de `set.seed()`, de modo que se genere una muestra de datos que fuera única. Recuerde que **todos los ejercicios** siguientes, **requieren** que **se empleen los datos generados**.
+
+
+```{r}
+
+# Instrucciones: reemplace el valor 123456789 "set.seed()", e incluya su RUT
+#                sin dígito verificador como argumento para fijar seed.
+#                Genere la muestra aleatoria solicitada.
+#                Esta muestra contiene el 50% de los datos originales,
+#                extrayendo 50% de cada comuna.
+
+set.seed(123456789)  
+
+# solo reemplazar el set.seed, y 
+# conservar el resto del código.
+
+data_poli <- dplyr::slice_sample(data_poli_full, prop = .5, by = comu)
+
+```
+
+
+## Ejercicio 4. Crear una variable que incluya  los puntajes globales de las diez preguntas de autoestima (au1 a au10). Guarde los puntajes totales en una variable llamada "autoestima".
+
+
+- Inserte los códigos utilizados para crear la variable "autoestima" a partir de los ítems au1 a au10. (Recuerde revisar si hay ítems inversos e invertirlos si corresponde).
+
+
+```{r}
+
+# Escriba su código de respuesta aquí
+
+```
+
+## Ejercicio 5. Diagrama de dispersión entre la variable autoestima y la variable depresion (dep).
+
+
+- Inserte los códigos utilizados para generar un gráfico de dispersión de las dos variables indicadas. La variable autoestima debe estar en el eje horizontal y depresión en el eje vertical. Recuerde personalizar el título para ambos ejes.
+
+- Calcule la media de la variable de respuesta y en el mismo gráfico incluya una línea que muestre esa media.
+
+```{r}
+
+# Escriba su código de respuesta aquí
+
+```
+
+
+## Ejercicio 6. Regresión lineal simple prediciendo la variable depresión en base al predictor autoestima
+
+- Inserte los códigos utilizados para realizar una regresión lineal utilizando la variable depresión (dep) como variable de respuesta y la variable autoestima como variable predictora. Genere el resumen de resultados del modelo de regresión.
+
+```{r}
+
+# Escriba su código de respuesta aquí
+
+```
+
+## Ejercicio 7. Reporte los resultados de la regresión.
+
+- Indique los valores de los siguientes resultados en el modelo de regresión:
+
+- **Respuesta**
+
+- El coeficiente del intercepto es: `#....indicar su respuesta en esta línea, y borrar este comentario.`
+
+- El coeficiente de la pendiente es: `#....indicar su respuesta en esta línea interpretando signo y magnitud, y borrar este comentario.`
+
+- La desviación estándar de los residuos es: `#....indicar su respuesta en esta línea, y borrar este comentario.`
+
+- El coeficiente de determinación (r cuadrado) es: `#....indicar su respuesta en esta línea, y borrar este comentario.`
+
+
+
+## Ejercicio 8. Graficar la recta de regresión
+
+- Genere un nuevo diagrama de dispersión entre la variable depresión (dep) y la variable autoestima.
+
+- En el mismo gráfico use los coeficientes de intercepto y pendiente para mostrar la recta de regresión que estimo en el ejercicio anterior.
+
+```{r}
+
+# Escriba su código de respuesta aquí
+
+```
+
+
+## Ejercicio 9. Interprete la desviación estándar de los residuos y el coeficiente de determinación
+
+- **Respuesta**
+
+- La desviación estándar de los residuos me indica qué: `#....indicar su respuesta en esta línea, y borrar este comentario.`
+
+- El coeficiente de determinación (r cuadrado) me indica qué: `#....indicar su respuesta en esta línea, y borrar este comentario.`
+
+
+
+## Ejercicio 10a. Repetir la regresión usando variables estandarizadas.
+
+- Cree un nuevo objeto llamado data_z que tenga solo las variables dep y autoestima de data_poli
+
+- Mantenga solo los casos que tengan todos los datos (eliminando casos con algun dato perdido)
+
+- Inserte los códigos para convertir a puntaje Z la variable autoestima y guárdela en la variable autoestima_z en data_z
+
+- Convierta a puntaje Z la variable depresión (dep) y guardela en la variable dep_z en data_z
+
+- Inserte los códigos utilizados para realizar una regresión lineal utilizando la variable autoestima_z como variable de respuesta y la variable dep_z como variable predictora.
+
+- Obtenga el resumen de resultados de la nueva regresión.
+
+>Nota: cuando se estandarizan variables, estas *centran* las variables a la media de la lista de valores disponibles en cada variable. Para asegurar que el centro entre ambas variables sea el mismo se requiere se comparta la misma lista de casos. Por lo anterior, en este caso primero creamos una base de datos que contiene solo a las variables de interés, y luego creamos las transformaciones de variables.
+
+```{r}
+
+# Escriba su código de respuesta aquí
+
+```
+
+
+## Ejercicio 10b. Interprete los coeficientes de la regresión con variables estandarizadas.
+
+- **Respuesta**
+
+- El coeficiente del intercepto es: `#....indicar su respuesta en esta línea, y borrar este comentario.`
+
+- El coeficiente de la pendiente es: `#....indicar su respuesta en esta línea interpretando signo y magnitud, y borrar este comentario.`
+
+
